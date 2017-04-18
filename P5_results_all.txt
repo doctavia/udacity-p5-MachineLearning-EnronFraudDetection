@@ -1,0 +1,351 @@
+ Classifiers Test Score Summary
+==============================
++---------------------------+-----------------+-----------------+-----------------+-----------------+
+| CLASSIFIERS               | ACCURACY        | PRECISION       | RECALL          | F1              |
++---------------------------+-----------------+-----------------+-----------------+-----------------+
+| NaiveBayes                | 0.854           | 0.437           | 0.339           | 0.382           |
++---------------------------+-----------------+-----------------+-----------------+-----------------+
+| DecisionTree              | 0.843           | 0.394           | 0.327           | 0.357           |
++---------------------------+-----------------+-----------------+-----------------+-----------------+
+| KNN                       | 0.867           | 0.504           | 0.231           | 0.316           |
++---------------------------+-----------------+-----------------+-----------------+-----------------+
+| LogisticRegression        | 0.651           | 0.212           | 0.597           | 0.313           |
++---------------------------+-----------------+-----------------+-----------------+-----------------+
+| RandomForest              | 0.844           | 0.378           | 0.262           | 0.309           |
++---------------------------+-----------------+-----------------+-----------------+-----------------+
+| AdaBoost                  | 0.809           | 0.251           | 0.218           | 0.234           |
++---------------------------+-----------------+-----------------+-----------------+-----------------+
+
+
+0 NaiveBayes
+
+ grid_params:  {'selectkbest__k': [3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15],
+ 'selectkbest__score_func': [<function sklearn.feature_selection.univariate_selection.f_classif>,
+  <function sklearn.feature_selection.univariate_selection.chi2>]}
+
+ Best estimator =  Pipeline(steps=[('selectkbest', SelectKBest(k=8, score_func=<function f_classif at 0x083024F0>)), ('gaussiannb', GaussianNB(priors=None))])
+
+ Selected features are:  
+['salary',
+ 'bonus',
+ 'deferred_income',
+ 'total_payments',
+ 'exercised_stock_options',
+ 'restricted_stock',
+ 'total_stock_value',
+ 'fraction_to_poi']
+
+
+ Score Summary:
+ 			  	score 	p-value
+feature 		
+total_stock_value 		32.389 	0.000
+exercised_stock_options 	29.187 	0.000
+restricted_stock 		21.654 	0.000
+fraction_to_poi 		17.318 	0.000
+salary 				14.483 	0.000
+bonus 				12.766 	0.001
+deferred_income 		10.756 	0.001
+total_payments 			8.096 	0.005
+loan_advances 			7.132 	0.009
+shared_receipt_with_poi 	6.555 	0.012
+long_term_incentive 		6.526 	0.012
+other 				4.028 	0.047
+expenses 			2.590 	0.111
+to_messages 			2.476 	0.119
+director_fees 			1.360 	0.246
+from_poi_to_this_person 	0.753 	0.388
+from_messages 			0.639 	0.426
+restricted_stock_deferred 	0.599 	0.441
+fraction_from_poi 		0.294 	0.589
+deferral_payments 		0.075 	0.784
+from_this_person_to_poi 	0.007 	0.934
+
+Time :  8.729 s
+==============================================================================================
+
+
+1 LogisticRegression
+
+ grid_params:  {'logisticregression__C': [0.001, 0.1, 1, 10, 100],
+ 'logisticregression__class_weight': ['balanced'],
+ 'logisticregression__fit_intercept': [True],
+ 'logisticregression__intercept_scaling': [0.5, 1.0, 1.5],
+ 'logisticregression__n_jobs': [-1],
+ 'logisticregression__penalty': ('l1', 'l2'),
+ 'selectkbest__k': [3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15],
+ 'selectkbest__score_func': [<function sklearn.feature_selection.univariate_selection.f_classif>,
+  <function sklearn.feature_selection.univariate_selection.chi2>]}
+
+ Best estimator =  Pipeline(steps=[('selectkbest', SelectKBest(k=15, score_func=<function f_classif at 0x083024F0>)), ('logisticregression', LogisticRegression(C=0.1, class_weight='balanced', dual=False,
+          fit_intercept=True, intercept_scaling=1.5, max_iter=100,
+          multi_class='ovr', n_jobs=-1, penalty='l2', random_state=None,
+          solver='liblinear', tol=0.0001, verbose=0, warm_start=False))])
+
+ Selected features are:  
+['salary',
+ 'bonus',
+ 'long_term_incentive',
+ 'deferred_income',
+ 'loan_advances',
+ 'other',
+ 'expenses',
+ 'director_fees',
+ 'total_payments',
+ 'exercised_stock_options',
+ 'restricted_stock',
+ 'total_stock_value',
+ 'to_messages',
+ 'shared_receipt_with_poi',
+ 'fraction_to_poi']
+
+
+ Score Summary:
+                            score  p-value
+feature                                   
+total_stock_value          32.389    0.000
+exercised_stock_options    29.187    0.000
+restricted_stock           21.654    0.000
+fraction_to_poi            17.318    0.000
+salary                     14.483    0.000
+bonus                      12.766    0.001
+deferred_income            10.756    0.001
+total_payments              8.096    0.005
+loan_advances               7.132    0.009
+shared_receipt_with_poi     6.555    0.012
+long_term_incentive         6.526    0.012
+other                       4.028    0.047
+expenses                    2.590    0.111
+to_messages                 2.476    0.119
+director_fees               1.360    0.246
+from_poi_to_this_person     0.753    0.388
+from_messages               0.639    0.426
+restricted_stock_deferred   0.599    0.441
+fraction_from_poi           0.294    0.589
+deferral_payments           0.075    0.784
+from_this_person_to_poi     0.007    0.934 
+
+
+Time :  275.116 s
+==============================================================================================
+
+
+2 DecisionTree
+
+ grid_params:  {'decisiontreeclassifier__criterion': ('gini', 'entropy'),
+ 'decisiontreeclassifier__min_samples_split': [2, 5, 10, 15, 25, 50],
+ 'decisiontreeclassifier__random_state': [42],
+ 'selectkbest__k': [3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15],
+ 'selectkbest__score_func': [<function sklearn.feature_selection.univariate_selection.f_classif>,
+  <function sklearn.feature_selection.univariate_selection.chi2>]}
+
+ Best estimator =  Pipeline(steps=[('selectkbest', SelectKBest(k=4, score_func=<function chi2 at 0x08302570>)), ('decisiontreeclassifier', DecisionTreeClassifier(class_weight=None, criterion='entropy', max_depth=None,
+            max_features=None, max_leaf_nodes=None,
+            min_impurity_split=1e-07, min_samples_leaf=1,
+            min_samples_split=10, min_weight_fraction_leaf=0.0,
+            presort=False, random_state=42, splitter='best'))])
+
+ Selected features are:  
+['loan_advances',
+ 'total_payments',
+ 'exercised_stock_options',
+ 'total_stock_value']
+
+ Score Summary:
+                                  score  p-value
+feature                                         
+loan_advances              5.347501e+08    0.000
+total_stock_value          3.508739e+08    0.000
+total_payments             3.146920e+08    0.000
+exercised_stock_options    2.733501e+08    0.000
+restricted_stock           6.707653e+07    0.000
+bonus                      2.867857e+07    0.000
+other                      1.998314e+07    0.000
+deferred_income            1.840657e+07    0.000
+long_term_incentive        9.014474e+06    0.000
+salary                     2.814142e+06    0.000
+restricted_stock_deferred  9.527585e+05    0.000
+deferral_payments          2.037606e+05    0.000
+expenses                   1.443579e+05    0.000
+director_fees              1.238916e+05    0.000
+shared_receipt_with_poi    1.014129e+04    0.000
+to_messages                6.853491e+03    0.000
+from_messages              3.982850e+03    0.000
+from_poi_to_this_person    1.145290e+02    0.000
+fraction_to_poi            4.480000e+00    0.034
+from_this_person_to_poi    1.243000e+00    0.265
+fraction_from_poi          1.800000e-02    0.894 
+
+
+
+
+ Decision Tree Feature Importances:
+                         Importance Score
+Feature                                  
+loan_advances                       0.614
+total_stock_value                   0.329
+total_payments                      0.056
+exercised_stock_options             0.000 
+
+Time :  87.727 s
+==============================================================================================
+
+
+3 KNN
+
+ grid_params:  {'kneighborsclassifier__algorithm': ('ball_tree', 'kd_tree', 'brute', 'auto'),
+ 'kneighborsclassifier__n_neighbors': [3, 5, 7, 9],
+ 'kneighborsclassifier__p': [1, 2],
+ 'kneighborsclassifier__weights': ('uniform', 'distance'),
+ 'selectkbest__k': [3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15],
+ 'selectkbest__score_func': [<function sklearn.feature_selection.univariate_selection.f_classif>,
+  <function sklearn.feature_selection.univariate_selection.chi2>]}
+
+ Best estimator =  Pipeline(steps=[('selectkbest', SelectKBest(k=6, score_func=<function f_classif at 0x083024F0>)), ('kneighborsclassifier', KNeighborsClassifier(algorithm='ball_tree', leaf_size=30, metric='minkowski',
+           metric_params=None, n_jobs=1, n_neighbors=3, p=1,
+           weights='distance'))])
+
+ Selected features are:  
+['salary',
+ 'bonus',
+ 'exercised_stock_options',
+ 'restricted_stock',
+ 'total_stock_value',
+ 'fraction_to_poi']
+
+
+ Score Summary:
+  				score 	p-value
+feature 		
+total_stock_value 		32.389 	0.000
+exercised_stock_options 	29.187 	0.000
+restricted_stock 		21.654 	0.000
+fraction_to_poi 		17.318 	0.000
+salary 				14.483 	0.000
+bonus 				12.766 	0.001
+deferred_income 		10.756 	0.001
+total_payments 			8.096 	0.005
+loan_advances 			7.132 	0.009
+shared_receipt_with_poi 	6.555 	0.012
+long_term_incentive 		6.526 	0.012
+other 				4.028 	0.047
+expenses 			2.590 	0.111
+to_messages 			2.476 	0.119
+director_fees 			1.360 	0.246
+from_poi_to_this_person 	0.753 	0.388
+from_messages 			0.639 	0.426
+restricted_stock_deferred 	0.599 	0.441
+fraction_from_poi 		0.294 	0.589
+deferral_payments 		0.075 	0.784
+from_this_person_to_poi 	0.007 	0.934
+
+
+Time :  541.565 s
+==============================================================================================
+
+
+4 AdaBoost
+
+ grid_params:  {'adaboostclassifier__algorithm': ('SAMME', 'SAMME.R'),
+ 'adaboostclassifier__base_estimator': [DecisionTreeClassifier(class_weight=None, criterion='gini', max_depth=None,
+              max_features=None, max_leaf_nodes=None,
+              min_impurity_split=1e-07, min_samples_leaf=1,
+              min_samples_split=2, min_weight_fraction_leaf=0.0,
+              presort=False, random_state=None, splitter='best')],
+ 'adaboostclassifier__learning_rate': [0.001, 0.1, 0.5, 1, 1.5, 2],
+ 'adaboostclassifier__n_estimators': [5, 10, 50, 100, 150],
+ 'adaboostclassifier__random_state': [42],
+ 'selectkbest__k': [3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15],
+ 'selectkbest__score_func': [<function sklearn.feature_selection.univariate_selection.f_classif>,
+  <function sklearn.feature_selection.univariate_selection.chi2>]}
+
+ Best estimator =  Pipeline(steps=[('selectkbest', SelectKBest(k=3, score_func=<function chi2 at 0x08302570>)), ('adaboostclassifier', AdaBoostClassifier(algorithm='SAMME',
+          base_estimator=DecisionTreeClassifier(class_weight=None, criterion='gini', max_depth=None,
+            max_features=None, max_leaf_nodes=None,
+  ...ndom_state=None, splitter='best'),
+          learning_rate=0.001, n_estimators=5, random_state=42))])
+
+ Selected features are:  ['loan_advances', 'total_payments', 'total_stock_value']
+
+
+ Score Summary:
+                                  score  p-value
+feature                                         
+loan_advances              5.347501e+08    0.000
+total_stock_value          3.508739e+08    0.000
+total_payments             3.146920e+08    0.000
+exercised_stock_options    2.733501e+08    0.000
+restricted_stock           6.707653e+07    0.000
+bonus                      2.867857e+07    0.000
+other                      1.998314e+07    0.000
+deferred_income            1.840657e+07    0.000
+long_term_incentive        9.014474e+06    0.000
+salary                     2.814142e+06    0.000
+restricted_stock_deferred  9.527585e+05    0.000
+deferral_payments          2.037606e+05    0.000
+expenses                   1.443579e+05    0.000
+director_fees              1.238916e+05    0.000
+shared_receipt_with_poi    1.014129e+04    0.000
+to_messages                6.853491e+03    0.000
+from_messages              3.982850e+03    0.000
+from_poi_to_this_person    1.145290e+02    0.000
+fraction_to_poi            4.480000e+00    0.034
+from_this_person_to_poi    1.243000e+00    0.265
+fraction_from_poi          1.800000e-02    0.894 
+
+
+Time :  776.088 s
+==============================================================================================
+
+
+5 RandomForest
+
+ grid_params:  {'randomforestclassifier__criterion': ('gini', 'entropy'),
+ 'randomforestclassifier__min_samples_split': [2, 5, 10, 15, 25, 50, 80, 100],
+ 'randomforestclassifier__n_estimators': [2, 3, 5, 8],
+ 'selectkbest__k': [3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15],
+ 'selectkbest__score_func': [<function sklearn.feature_selection.univariate_selection.f_classif>,
+  <function sklearn.feature_selection.univariate_selection.chi2>]}
+
+ Best estimator =  Pipeline(steps=[('selectkbest', SelectKBest(k=4, score_func=<function chi2 at 0x08302570>)), ('randomforestclassifier', RandomForestClassifier(bootstrap=True, class_weight=None, criterion='gini',
+            max_depth=None, max_features='auto', max_leaf_nodes=None,
+            min_impurity_split=1e-07, min_samples_leaf=1,
+            min_samples_split=2, min_weight_fraction_leaf=0.0,
+            n_estimators=3, n_jobs=1, oob_score=False, random_state=None,
+            verbose=0, warm_start=False))])
+
+ Selected features are:  
+['loan_advances',
+ 'total_payments',
+ 'exercised_stock_options',
+ 'total_stock_value']
+
+
+ Score Summary:
+  					score 	p-value
+feature 		
+loan_advances 			5.347501e+08 	0.000
+total_stock_value 		3.508739e+08 	0.000
+total_payments 			3.146920e+08 	0.000
+exercised_stock_options 	2.733501e+08 	0.000
+restricted_stock 		6.707653e+07 	0.000
+bonus 				2.867857e+07 	0.000
+other 				1.998314e+07 	0.000
+deferred_income 		1.840657e+07 	0.000
+long_term_incentive 		9.014474e+06 	0.000
+salary 				2.814142e+06 	0.000
+restricted_stock_deferred 	9.527585e+05 	0.000
+deferral_payments 		2.037606e+05 	0.000
+expenses 			1.443579e+05 	0.000
+director_fees 			1.238916e+05 	0.000
+shared_receipt_with_poi 	1.014129e+04 	0.000
+to_messages 			6.853491e+03 	0.000
+from_messages 			3.982850e+03 	0.000
+from_poi_to_this_person 	1.145290e+02 	0.000
+fraction_to_poi 		4.480000e+00 	0.034
+from_this_person_to_poi 	1.243000e+00 	0.265
+fraction_from_poi 		1.800000e-02 	0.894 
+
+
+Time :  1621.02 s
+==============================================================================================
